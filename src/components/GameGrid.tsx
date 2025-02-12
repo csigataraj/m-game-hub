@@ -3,9 +3,10 @@ import useFetchGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
+import { Genre } from "../interfaces/genre";
 
-const GameGrid = () => {
-  const { data, error, isLoading } = useFetchGames();
+const GameGrid = ({ selectedGenre }: { selectedGenre: Genre | null }) => {
+  const { data, error, isLoading } = useFetchGames(selectedGenre);
   const skeletons = Array()
     .fill(6)
     .map((_, index) => index + 1);
@@ -21,12 +22,12 @@ const GameGrid = () => {
         {isLoading &&
           skeletons.map((item) => (
             <GameCardContainer key={item}>
-              <GameCardSkeleton key={item} />
+              <GameCardSkeleton />
             </GameCardContainer>
           ))}
         {data.map((item) => (
           <GameCardContainer key={item.id}>
-            <GameCard key={item.id} game={item} />
+            <GameCard game={item} />
           </GameCardContainer>
         ))}
       </SimpleGrid>
