@@ -6,7 +6,9 @@ import GameCardContainer from "./GameCardContainer";
 
 const GameGrid = () => {
   const { data, error, isLoading } = useFetchGames();
-  const skeletons = [1, 2, 3, 4, 5, 6];
+  const skeletons = Array()
+    .fill(6)
+    .map((_, index) => index + 1);
 
   return (
     <>
