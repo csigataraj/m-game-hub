@@ -1,30 +1,34 @@
 import { useState, useEffect } from "react";
 import { RAWG_API_URL, RAWG_API_KEY } from "../config/config";
 import create from "../services/http-service";
-import { Genre, GenreResponse } from "../interfaces/genre";
 
-const useFetchGenres = () => {
+interface FetchResponse<T>{
+  count: number;
+  results: T[];
+}
+
+const useFetchData = <T>(endpoint: string) => {
   const [isLoading, setLoading] = useState(false);
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
   const API = create(RAWG_API_URL, RAWG_API_KEY);
 
   useEffect(() => {
     setLoading(true);
-    API.get<GenreResponse>("genres")
+    API.get<FetchResponse<T>>(endpoint)
       .then((res) => {
-        setGenres(res.data.results);
+        setData(res.data.results);
         setLoading(false);
         console.log(res.data.results);
       })
       .catch((err) => {
-        setGenres([]);
+        setData([]);
         setLoading(false);
         setError(err.message);
       });
   }, []);
 
-  return { genres, error, isLoading };
+  return { data, error, isLoading };
 };
 
-export default useFetchGenres;
+export default useFetchData;

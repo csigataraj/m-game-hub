@@ -3,10 +3,9 @@ import useFetchGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import useFetchGenres from "../hooks/useGenres";
 
 const GameGrid = () => {
-  const { games, error, isLoading } = useFetchGames();
+  const { data, error, isLoading } = useFetchGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
@@ -19,12 +18,12 @@ const GameGrid = () => {
       >
         {isLoading &&
           skeletons.map((item) => (
-            <GameCardContainer>
+            <GameCardContainer key={item}>
               <GameCardSkeleton key={item} />
             </GameCardContainer>
           ))}
-        {games.map((item) => (
-          <GameCardContainer>
+        {data.map((item) => (
+          <GameCardContainer key={item.id}>
             <GameCard key={item.id} game={item} />
           </GameCardContainer>
         ))}
