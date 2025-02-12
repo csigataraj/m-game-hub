@@ -1,16 +1,9 @@
-import {
-  Card,
-  CardBody,
-  Stack,
-  Heading,
-  Image,
-  Text,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import useFetchGames from "../hooks/fetch-games-hook";
+import { Text, SimpleGrid } from "@chakra-ui/react";
+import useFetchGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
+import useFetchGenres from "../hooks/useGenres";
 
 const GameGrid = () => {
   const { games, error, isLoading } = useFetchGames();

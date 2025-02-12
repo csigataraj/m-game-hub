@@ -16,8 +16,8 @@ class HTTPService {
     });
   }
 
-  get<T>(options?: AxiosRequestConfig) {
-    return this.axiosAPI.get<T>("games", options);
+  get<T>(endpoint: string, options?: AxiosRequestConfig) {
+    return this.axiosAPI.get<T>(endpoint, options);
   }
 }
 

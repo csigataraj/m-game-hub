@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import { RAWG_API_KEY, RAWG_API_URL } from "../config/config";
+import { useState, useEffect } from "react";
+import { RAWG_API_URL, RAWG_API_KEY } from "../config/config";
 import create from "../services/http-service";
-import { Game, GameResponse } from "../interfaces/game";
+import { Genre, GenreResponse } from "../interfaces/genre";
 
-const useFetchGames = () => {
+const useFetchGenres = () => {
   const [isLoading, setLoading] = useState(false);
-  const [games, setGames] = useState<Game[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
   const [error, setError] = useState("");
   const API = create(RAWG_API_URL, RAWG_API_KEY);
 
   useEffect(() => {
     setLoading(true);
-    API.get<GameResponse>()
+    API.get<GenreResponse>("genres")
       .then((res) => {
-        setGames(res.data.results);
+        setGenres(res.data.results);
         setLoading(false);
         console.log(res.data.results);
       })
       .catch((err) => {
-        setGames([]);
+        setGenres([]);
         setLoading(false);
         setError(err.message);
       });
   }, []);
 
-  return { games, error, isLoading };
+  return { genres, error, isLoading };
 };
 
-export default useFetchGames;
+export default useFetchGenres;
