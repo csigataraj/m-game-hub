@@ -10,6 +10,7 @@ import {
 import useFetchGames from "../hooks/fetch-games-hook";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
+import GameCardContainer from "./GameCardContainer";
 
 const GameGrid = () => {
   const { games, error, isLoading } = useFetchGames();
@@ -23,9 +24,16 @@ const GameGrid = () => {
         spacing={10}
         padding="10px"
       >
-        {isLoading && skeletons.map((item) => <GameCardSkeleton key={item} />)}
+        {isLoading &&
+          skeletons.map((item) => (
+            <GameCardContainer>
+              <GameCardSkeleton key={item} />
+            </GameCardContainer>
+          ))}
         {games.map((item) => (
-          <GameCard key={item.id} game={item} />
+          <GameCardContainer>
+            <GameCard key={item.id} game={item} />
+          </GameCardContainer>
         ))}
       </SimpleGrid>
     </>
