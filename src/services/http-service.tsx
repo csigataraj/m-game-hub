@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 class HTTPService {
   endpoint: string;
@@ -16,8 +16,8 @@ class HTTPService {
     });
   }
 
-  get<T>() {
-    return this.axiosAPI.get<T>("games");
+  get<T>(options?: AxiosRequestConfig) {
+    return this.axiosAPI.get<T>("games", options);
   }
 }
 

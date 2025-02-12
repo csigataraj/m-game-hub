@@ -1,55 +1,30 @@
-import { useEffect, useState } from "react";
-import create from "../services/http-service";
-import { RAWG_API_KEY, RAWG_API_URL } from "../config/config";
-import { Card, CardBody, Stack, Heading, Image, Text } from "@chakra-ui/react";
-
-interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-}
-
-interface GameResponse {
-  count: number;
-  next: string;
-  previous: string;
-  results: Game[];
-}
+import {
+  Card,
+  CardBody,
+  Stack,
+  Heading,
+  Image,
+  Text,
+  SimpleGrid,
+} from "@chakra-ui/react";
+import useFetchGames from "../hooks/fetch-games-hook";
+import GameCard from "./GameCard";
 
 const GameGrid = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
-  const API = create(RAWG_API_URL, RAWG_API_KEY);
-
-  useEffect(() => {
-    API.get<GameResponse>()
-      .then((res) => {
-        setGames(res.data.results);
-        console.log(res.data.results);
-      })
-      .catch((err) => {
-        setGames([]);
-        setError(err.message);
-      });
-  }, []);
+  const { games, error } = useFetchGames();
 
   return (
     <>
       {error && <Text>{error}</Text>}
-      {games.map((item) => (
-        <Card maxW="sm">
-          <CardBody>
-            <Image
-              src={item.background_image}
-              alt="Green double couch with wooden legs"
-              borderRadius="lg"
-            />
-            <Stack mt="6" spacing="3">
-              <Heading size="md">{item.name}</Heading>
-            </Stack>
-          </CardBody>
-        </Card>
-      ))}
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+        spacing={10}
+        padding="10px"
+      >
+        {games.map((item) => (
+          <GameCard key={item.id} game={item} />
+        ))}
+      </SimpleGrid>
     </>
   );
 };
