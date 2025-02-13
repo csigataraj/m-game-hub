@@ -5,8 +5,10 @@ import GenreListItemSkeleton from "./GenreListItemSkeleton";
 import { Genre } from "../interfaces/genre";
 
 const GenreList = ({
+  selectedGenre,
   onSelectGenre,
 }: {
+  selectedGenre: Genre | null;
   onSelectGenre: (genre: Genre) => void;
 }) => {
   const { data, isLoading, error } = useFetchGenres();
@@ -37,6 +39,7 @@ const GenreList = ({
               src={getCroppedImageUrl(item.image_background)}
             />
             <Button
+              fontWeight={item.id === selectedGenre?.id ? "bold" : "normal"}
               fontSize="lg"
               variant="link"
               onClick={() => onSelectGenre(item)}
