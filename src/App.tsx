@@ -6,6 +6,7 @@ import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import { GameFilterConfig } from "./interfaces/game";
 import SortingDropDown from "./components/SortingDropdown";
+import styles from "./index.css";
 
 function App() {
   const [filterConfig, setFilterConfig] = useState<GameFilterConfig>(
@@ -18,7 +19,11 @@ function App() {
       templateColumns={{ base: "1fr", lg: "220px 1fr" }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar
+          onSearch={(searchText) =>
+            setFilterConfig({ ...filterConfig, searchText })
+          }
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX="5px">
@@ -48,6 +53,7 @@ function App() {
             genre: filterConfig.genre,
             platform: filterConfig.platform,
             order: filterConfig.order,
+            searchText: filterConfig.searchText,
           }}
         />
       </GridItem>

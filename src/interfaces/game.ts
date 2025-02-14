@@ -28,4 +28,5 @@ export interface GameFilterConfig {
   genre: Genre | null;
   platform: Platform | null;
   order: string;
+  searchText: string;
 }
