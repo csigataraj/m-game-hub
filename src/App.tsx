@@ -1,4 +1,4 @@
-import { filter, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -6,7 +6,8 @@ import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import { GameFilterConfig } from "./interfaces/game";
 import SortingDropDown from "./components/SortingDropdown";
-import styles from "./index.css";
+
+import DynamicHeading from "./components/DynamicHeading";
 
 function App() {
   const [filterConfig, setFilterConfig] = useState<GameFilterConfig>(
@@ -16,7 +17,7 @@ function App() {
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-      templateColumns={{ base: "1fr", lg: "220px 1fr" }}
+      templateColumns={{ base: "1fr", lg: "200px 1fr" }}
     >
       <GridItem area="nav">
         <NavBar
@@ -36,18 +37,25 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <HStack paddingLeft="9px" paddingBottom={5}>
-          <PlatformSelector
-            onSelectPlatform={(platform) =>
-              setFilterConfig({ ...filterConfig, platform })
-            }
+        <Box paddingLeft="9px">
+          <DynamicHeading
+            text={`${filterConfig.platform?.name || ""} ${
+              filterConfig.genre?.name || ""
+            } Games`}
           />
-          <SortingDropDown
-            onSelectSorting={(order) =>
-              setFilterConfig({ ...filterConfig, order })
-            }
-          />
-        </HStack>
+          <HStack paddingBottom={5}>
+            <PlatformSelector
+              onSelectPlatform={(platform) =>
+                setFilterConfig({ ...filterConfig, platform })
+              }
+            />
+            <SortingDropDown
+              onSelectSorting={(order) =>
+                setFilterConfig({ ...filterConfig, order })
+              }
+            />
+          </HStack>
+        </Box>
         <GameGrid
           filterConfig={{
             genre: filterConfig.genre,
