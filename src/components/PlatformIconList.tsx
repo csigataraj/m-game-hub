@@ -10,9 +10,8 @@ import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { HStack, Icon } from "@chakra-ui/react";
-import { Platform } from "../interfaces/game";
+import { GamePlatform } from "../interfaces/game";
 import { IconType } from "react-icons";
-import { color } from "framer-motion";
 
 const iconMap: { [key: string]: IconType } = {
   pc: FaWindows,
@@ -25,7 +24,7 @@ const iconMap: { [key: string]: IconType } = {
   nintendo: SiNintendo,
 };
 
-const PlatformIconList = ({ platforms }: { platforms: Platform[] }) => {
+const PlatformIconList = ({ platforms }: { platforms: GamePlatform[] }) => {
   return (
     <HStack marginY={1}>
       {platforms.map((item) => (

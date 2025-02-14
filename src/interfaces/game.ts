@@ -1,4 +1,7 @@
-export interface Platform {
+import { Genre } from "./genre";
+import { Platform } from "./platform";
+
+export interface GamePlatform {
   platform: {
     id: number;
     name: string;
@@ -10,7 +13,7 @@ export interface Game {
   id: number;
   name: string;
   background_image: string;
-  parent_platforms: Platform[];
+  parent_platforms: GamePlatform[];
   metacritic: number;
 }
 
@@ -19,4 +22,9 @@ export interface GameResponse {
   next: string;
   previous: string;
   results: Game[];
+}
+
+export interface GameFilterConfig {
+  genre: Genre | null;
+  platform: Platform | undefined;
 }

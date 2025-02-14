@@ -1,8 +1,8 @@
 import { Button, HStack, Image, List, ListItem } from "@chakra-ui/react";
-import useFetchGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import GenreListItemSkeleton from "./GenreListItemSkeleton";
 import { Genre } from "../interfaces/genre";
+import useFetchGenres from "../hooks/useGenres";
 
 const GenreList = ({
   selectedGenre,
@@ -15,6 +15,11 @@ const GenreList = ({
   const skeletons = Array()
     .fill(19)
     .map((_, index) => index + 1);
+
+  const sortedData = [...data].sort((a, b) =>
+    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+  );
+
   if (error) {
     return null;
   }
@@ -30,7 +35,7 @@ const GenreList = ({
 
   return (
     <List>
-      {data.map((item) => (
+      {sortedData.map((item) => (
         <ListItem key={item.id} paddingY="5px">
           <HStack>
             <Image

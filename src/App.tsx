@@ -4,9 +4,14 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./interfaces/genre";
+import PlatformSelector from "./components/PlatformSelector";
+import { Platform } from "./interfaces/platform";
+import { GameFilterConfig } from "./interfaces/game";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [filterConfig, setFilterConfig] = useState<GameFilterConfig>(
+    {} as GameFilterConfig
+  );
 
   return (
     <Grid
@@ -19,13 +24,25 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX="5px">
           <GenreList
-            selectedGenre={selectedGenre}
-            onSelectGenre={setSelectedGenre}
+            selectedGenre={filterConfig.genre}
+            onSelectGenre={(genre) =>
+              setFilterConfig({ ...filterConfig, genre })
+            }
           />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <GameGrid selectedGenre={selectedGenre} />
+        <PlatformSelector
+          onSelectPlatform={(platform) =>
+            setFilterConfig({ ...filterConfig, platform })
+          }
+        />
+        <GameGrid
+          filterConfig={{
+            genre: filterConfig.genre,
+            platform: filterConfig.platform,
+          }}
+        />
       </GridItem>
     </Grid>
   );

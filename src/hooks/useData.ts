@@ -20,7 +20,6 @@ const useFetchData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, d
       .then((res) => {
         setData(res.data.results);
         setLoading(false);
-        console.log(res.data.results);
       })
       .catch((err) => {
         setData([]);
