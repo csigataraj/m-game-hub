@@ -11,32 +11,36 @@ const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
     .fill(6)
     .map((_, index) => index + 1);
 
+  if (error) {
+    return <Text>{error}</Text>;
+  }
+
+  if (!data.length) {
+    return (
+      <Text paddingTop={2} paddingLeft="9px">
+        {`No results `}
+      </Text>
+    );
+  }
+
   return (
-    <>
-      {error && <Text>{error}</Text>}
-      {!data.length && (
-        <Text paddingTop={2} paddingLeft="9px">
-          {`No results `}
-        </Text>
-      )}
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        spacing={6}
-        padding="10px"
-      >
-        {isLoading &&
-          skeletons.map((item) => (
-            <GameCardContainer key={item}>
-              <GameCardSkeleton />
-            </GameCardContainer>
-          ))}
-        {data.map((item) => (
-          <GameCardContainer key={item.id}>
-            <GameCard game={item} />
+    <SimpleGrid
+      columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+      spacing={6}
+      padding="10px"
+    >
+      {isLoading &&
+        skeletons.map((item) => (
+          <GameCardContainer key={item}>
+            <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      </SimpleGrid>
-    </>
+      {data.map((item) => (
+        <GameCardContainer key={item.id}>
+          <GameCard game={item} />
+        </GameCardContainer>
+      ))}
+    </SimpleGrid>
   );
 };
 
