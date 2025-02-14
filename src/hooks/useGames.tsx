@@ -8,6 +8,7 @@ const useFetchGames = (filterConfig: GameFilterConfig) =>
       params: {
         genres: filterConfig.genre?.id,
         platforms: filterConfig.platform?.id,
+        ordering: filterConfig.order,
       },
     },
     [filterConfig]

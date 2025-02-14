@@ -26,5 +26,6 @@ export interface GameResponse {
 
 export interface GameFilterConfig {
   genre: Genre | null;
-  platform: Platform | undefined;
+  platform: Platform | null;
+  order: string;
 }

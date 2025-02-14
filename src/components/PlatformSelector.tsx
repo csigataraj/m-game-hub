@@ -5,7 +5,7 @@ import { Platform } from "../interfaces/platform";
 const PlatformSelector = ({
   onSelectPlatform,
 }: {
-  onSelectPlatform: (value: Platform | undefined) => void;
+  onSelectPlatform: (value: Platform) => void;
 }) => {
   const { data, isLoading, error } = useFetchPlatforms();
 
@@ -22,14 +22,13 @@ const PlatformSelector = ({
 
   return (
     <Select
-      paddingLeft="9px"
       variant="filled"
       placeholder="Platform"
-      width={250}
+      width={"auto"}
       onChange={(event) => {
         const selectedPlatform = data.find(
           (item) => item.id.toString() === event.target.value
-        );
+        ) as Platform;
         onSelectPlatform(selectedPlatform);
       }}
     >

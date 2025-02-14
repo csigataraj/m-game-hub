@@ -1,12 +1,11 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { filter, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
-import { Genre } from "./interfaces/genre";
 import PlatformSelector from "./components/PlatformSelector";
-import { Platform } from "./interfaces/platform";
 import { GameFilterConfig } from "./interfaces/game";
+import SortingDropDown from "./components/SortingDropdown";
 
 function App() {
   const [filterConfig, setFilterConfig] = useState<GameFilterConfig>(
@@ -32,15 +31,23 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <PlatformSelector
-          onSelectPlatform={(platform) =>
-            setFilterConfig({ ...filterConfig, platform })
-          }
-        />
+        <HStack paddingLeft="9px" paddingBottom={5}>
+          <PlatformSelector
+            onSelectPlatform={(platform) =>
+              setFilterConfig({ ...filterConfig, platform })
+            }
+          />
+          <SortingDropDown
+            onSelectSorting={(order) =>
+              setFilterConfig({ ...filterConfig, order })
+            }
+          />
+        </HStack>
         <GameGrid
           filterConfig={{
             genre: filterConfig.genre,
             platform: filterConfig.platform,
+            order: filterConfig.order,
           }}
         />
       </GridItem>

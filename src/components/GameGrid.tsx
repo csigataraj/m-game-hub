@@ -15,13 +15,11 @@ const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
   return (
     <>
       {error && <Text>{error}</Text>}
-      {!data.length &&
-        filterConfig.genre !== null &&
-        filterConfig.platform !== null && (
-          <Text paddingTop={2} paddingLeft="9px">
-            {`No results for ${filterConfig.genre?.name} genre on ${filterConfig.platform?.name} platform`}
-          </Text>
-        )}
+      {!data.length && (
+        <Text paddingTop={2} paddingLeft="9px">
+          {`No results `}
+        </Text>
+      )}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
         spacing={3}
