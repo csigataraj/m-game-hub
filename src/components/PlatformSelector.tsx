@@ -7,14 +7,7 @@ const PlatformSelector = ({
 }: {
   onSelectPlatform: (value: Platform) => void;
 }) => {
-  const { data, isLoading, error } = useFetchPlatforms();
-
-  if (error) {
-    return null;
-  }
-  if (isLoading) {
-    return <Spinner />;
-  }
+  const { data } = useFetchPlatforms();
 
   const sortedData = [...data].sort((a, b) =>
     a.name.toLowerCase().localeCompare(b.name.toLowerCase())

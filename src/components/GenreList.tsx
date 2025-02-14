@@ -7,7 +7,6 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import getCroppedImageUrl from "../services/image-url";
-import GenreListItemSkeleton from "./GenreListItemSkeleton";
 import { Genre } from "../interfaces/genre";
 import useFetchGenres from "../hooks/useGenres";
 
@@ -18,28 +17,10 @@ const GenreList = ({
   selectedGenre: Genre | null;
   onSelectGenre: (genre: Genre) => void;
 }) => {
-  const { data, isLoading, error } = useFetchGenres();
-  const skeletons = Array()
-    .fill(19)
-    .map((_, index) => index + 1);
-
+  const { data } = useFetchGenres();
   const sortedData = [...data].sort((a, b) =>
     a.name.toLowerCase().localeCompare(b.name.toLowerCase())
   );
-
-  if (error) {
-    return null;
-  }
-  if (isLoading) {
-    return (
-      <List>
-        {skeletons.map((item) => (
-          <GenreListItemSkeleton key={item} />
-        ))}
-      </List>
-    );
-  }
-
   return (
     <>
       <Heading fontSize={"2xl"} marginBottom={3}>

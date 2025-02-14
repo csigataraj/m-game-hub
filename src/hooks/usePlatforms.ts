@@ -1,6 +1,4 @@
-import { Platform } from "../interfaces/platform";
-import useFetchData from "./useData";
+import platforms from "../data/platforms";
 
-
-const useFetchPlatforms = () => useFetchData<Platform>("platforms");
+const useFetchPlatforms = () => ({data: platforms, isLoading: false, error: null});
 export default useFetchPlatforms;

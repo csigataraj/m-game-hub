@@ -7,7 +7,6 @@ import { GameFilterConfig } from "../interfaces/game";
 
 const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
   const { data, error, isLoading } = useFetchGames(filterConfig);
-  console.log("GAME DATA: ", data);
   const skeletons = Array()
     .fill(6)
     .map((_, index) => index + 1);
