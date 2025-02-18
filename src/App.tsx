@@ -45,12 +45,14 @@ function App() {
           />
           <HStack paddingBottom={5}>
             <PlatformSelector
+              selectedPlatform={filterConfig.platform}
               onSelectPlatform={(platform) =>
                 setFilterConfig({ ...filterConfig, platform })
               }
             />
             <SortingDropDown
-              onSelectSorting={(order) =>
+              currentSortOrder={filterConfig.order}
+              onSelectSorting={(order: string) =>
                 setFilterConfig({ ...filterConfig, order })
               }
             />

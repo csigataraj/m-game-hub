@@ -1,10 +1,13 @@
-import { Select, Spinner } from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import useFetchPlatforms from "../hooks/usePlatforms";
 import { Platform } from "../interfaces/platform";
+import { BsChevronDown } from "react-icons/bs";
 
 const PlatformSelector = ({
+  selectedPlatform,
   onSelectPlatform,
 }: {
+  selectedPlatform: Platform | null;
   onSelectPlatform: (value: Platform) => void;
 }) => {
   const { data } = useFetchPlatforms();
@@ -14,23 +17,21 @@ const PlatformSelector = ({
   );
 
   return (
-    <Select
-      variant="filled"
-      placeholder="Platform"
-      width={"auto"}
-      onChange={(event) => {
-        const selectedPlatform = data.find(
-          (item) => item.id.toString() === event.target.value
-        ) as Platform;
-        onSelectPlatform(selectedPlatform);
-      }}
-    >
-      {sortedData.map((item) => (
-        <option key={item.id} value={item.id}>
-          {item.name}
-        </option>
-      ))}
-    </Select>
+    <Menu>
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+        {selectedPlatform?.name || "Platforms"}
+      </MenuButton>
+      <MenuList>
+        {sortedData.map((platform) => (
+          <MenuItem
+            onClick={() => onSelectPlatform(platform)}
+            key={platform.id}
+          >
+            {platform.name}
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
   );
 };
 
