@@ -1,25 +1,22 @@
+import { useQuery } from "@tanstack/react-query";
 import { Game, GameFilterConfig } from "../interfaces/game";
-import useFetchData from "./useData";
+import apiClient, { FetchResponse } from "../services/apiClient";
 
 const useFetchGames = (filterConfig: GameFilterConfig) => {
-  // API has a bug that returns no data for playstation parent platform ID, so these are all the individual PS ID-s
-  const playstationFailSafe = "15,16,17,18,19,27,187";
-
-  return useFetchData<Game>(
-    "games",
-    {
-      params: {
-        genres: filterConfig.genre?.id,
-        platforms:
-          filterConfig.platform?.id !== 2
-            ? filterConfig.platform?.id
-            : playstationFailSafe,
-        ordering: filterConfig.order,
-        search: filterConfig.searchText,
-      },
-    },
-    [filterConfig]
-  );
+  return useQuery<FetchResponse<Game>, Error>({
+    queryKey: ["games", filterConfig],
+    queryFn: () =>
+      apiClient
+        .get<FetchResponse<Game>>("/games", {
+          params: {
+            genres: filterConfig.genre?.id,
+            parent_platforms: filterConfig.platform?.id,
+            ordering: filterConfig.order,
+            search: filterConfig.searchText,
+          },
+        })
+        .then((res) => res.data),
+  });
 };
 
 export default useFetchGames;

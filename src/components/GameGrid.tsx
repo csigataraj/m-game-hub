@@ -12,10 +12,10 @@ const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
     .map((_, index) => index + 1);
 
   if (error) {
-    return <Text>{error}</Text>;
+    return <Text>{error.message}</Text>;
   }
 
-  if (!data.length) {
+  if (!data?.results.length) {
     return (
       <Text paddingTop={2} paddingLeft="9px">
         {`No results `}
@@ -35,7 +35,7 @@ const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      {data.map((item) => (
+      {data?.results.map((item) => (
         <GameCardContainer key={item.id}>
           <GameCard game={item} />
         </GameCardContainer>
