@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { RAWG_API_URL, RAWG_API_KEY } from "../config/config";
 import create from "../services/http-service";
 import { AxiosRequestConfig } from "axios";
+import apiClient from "../services/apiClient";
 
-interface FetchResponse<T>{
+export interface FetchResponse<T>{
   count: number;
   results: T[];
 }
@@ -12,7 +13,7 @@ const useFetchData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, d
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
-  const API = create(RAWG_API_URL, RAWG_API_KEY);
+  const API = apiClient;
 
   useEffect(() => {
     setLoading(true);

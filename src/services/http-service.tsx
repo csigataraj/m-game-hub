@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
-class HTTPService {
+class HTTPService<T> {
   endpoint: string;
   axiosAPI: AxiosInstance;
   API_KEY: string;
@@ -16,12 +16,9 @@ class HTTPService {
     });
   }
 
-  get<T>(endpoint: string, options?: AxiosRequestConfig) {
-    return this.axiosAPI.get<T>(endpoint, options);
+  get(endpoint: string, options?: AxiosRequestConfig) {
+    return this.axiosAPI.get<T[]>(endpoint, options).then((res) => res.data);
   }
 }
 
-const create = (endpoint: string, apiKey: string) =>
-  new HTTPService(endpoint, apiKey);
-
-export default create;
+export default HTTPService;

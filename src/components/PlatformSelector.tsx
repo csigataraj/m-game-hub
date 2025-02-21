@@ -12,7 +12,8 @@ const PlatformSelector = ({
 }) => {
   const { data } = useFetchPlatforms();
 
-  const sortedData = [...data].sort((a, b) =>
+  let sortedData = data ? [...data.results] : [];
+  sortedData.sort((a, b) =>
     a.name.toLowerCase().localeCompare(b.name.toLowerCase())
   );
 
