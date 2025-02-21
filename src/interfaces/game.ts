@@ -1,19 +1,13 @@
 import { Genre } from "./genre";
 import { Platform } from "./platform";
 
-export interface GamePlatform {
-  platform: {
-    id: number;
-    name: string;
-    slug: string;
-  };
-}
-
 export interface Game {
   id: number;
   name: string;
   background_image: string;
-  parent_platforms: GamePlatform[];
+  parent_platforms: {
+    platform: Platform
+  }[];
   metacritic: number;
   rating_top: number;
 }
