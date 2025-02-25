@@ -10,6 +10,6 @@ const useFetchPlatforms = () =>  useQuery({
         queryKey: ['platforms'],
         queryFn: apiClient.getAll,
         staleTime: ONE_DAY,
-        initialData: {count: platforms.length, results: platforms}
+        initialData: platforms
       });
 export default useFetchPlatforms;

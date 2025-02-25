@@ -3,7 +3,7 @@ import { RAWG_API_KEY, RAWG_API_URL } from "../config/config";
 
 export interface FetchResponse<T> {
   count: number;
-  prev: string | null;
+  previous: string | null;
   next: string | null;
   results: T[];
 }
