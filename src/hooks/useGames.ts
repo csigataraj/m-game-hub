@@ -11,8 +11,8 @@ const useFetchGames = (filterConfig: GameFilterConfig) => {
     queryFn: ({pageParam = 1}) =>
       apiClient.getAll({
         params: {
-          genres: filterConfig.genre?.id,
-          parent_platforms: filterConfig.platform?.id,
+          genres: filterConfig.genre,
+          parent_platforms: filterConfig.platform,
           ordering: filterConfig.order,
           search: filterConfig.searchText,
           page: pageParam

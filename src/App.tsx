@@ -31,23 +31,19 @@ function App() {
           <GenreList
             selectedGenre={filterConfig.genre}
             onSelectGenre={(genre) =>
-              setFilterConfig({ ...filterConfig, genre })
+              setFilterConfig({ ...filterConfig, genre: genre.id })
             }
           />
         </GridItem>
       </Show>
       <GridItem area="main">
         <Box paddingLeft="9px">
-          <DynamicHeading
-            text={`${filterConfig.platform?.name || ""} ${
-              filterConfig.genre?.name || ""
-            } Games`}
-          />
+          <DynamicHeading filterConfig={filterConfig} />
           <HStack paddingBottom={5}>
             <PlatformSelector
               selectedPlatform={filterConfig.platform}
               onSelectPlatform={(platform) =>
-                setFilterConfig({ ...filterConfig, platform })
+                setFilterConfig({ ...filterConfig, platform: platform.id })
               }
             />
             <SortingDropDown

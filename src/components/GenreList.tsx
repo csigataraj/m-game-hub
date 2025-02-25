@@ -14,7 +14,7 @@ const GenreList = ({
   selectedGenre,
   onSelectGenre,
 }: {
-  selectedGenre: Genre | null;
+  selectedGenre?: number;
   onSelectGenre: (genre: Genre) => void;
 }) => {
   const { data } = useFetchGenres();
@@ -38,7 +38,7 @@ const GenreList = ({
                 src={getCroppedImageUrl(item.image_background)}
               />
               <Button
-                fontWeight={item.id === selectedGenre?.id ? "bold" : "normal"}
+                fontWeight={item.id === selectedGenre ? "bold" : "normal"}
                 fontSize="lg"
                 variant="link"
                 whiteSpace={"normal"}

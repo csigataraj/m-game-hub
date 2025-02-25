@@ -20,8 +20,8 @@ export interface GameResponse {
 }
 
 export interface GameFilterConfig {
-  genre: Genre | null;
-  platform: Platform | null;
+  genre?: number;
+  platform?: number;
   order: string;
   searchText: string;
 }

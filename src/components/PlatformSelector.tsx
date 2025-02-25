@@ -7,10 +7,13 @@ const PlatformSelector = ({
   selectedPlatform,
   onSelectPlatform,
 }: {
-  selectedPlatform: Platform | null;
+  selectedPlatform?: number;
   onSelectPlatform: (value: Platform) => void;
 }) => {
   const { data } = useFetchPlatforms();
+  const selectedPlatformName = data?.results.find(
+    (item) => item.id === selectedPlatform
+  )?.name;
 
   let sortedData = data ? [...data.results] : [];
   sortedData.sort((a, b) =>
@@ -20,7 +23,7 @@ const PlatformSelector = ({
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-        {selectedPlatform?.name || "Platforms"}
+        {selectedPlatformName || "Platforms"}
       </MenuButton>
       <MenuList>
         {sortedData.map((platform) => (
