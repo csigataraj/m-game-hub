@@ -1,10 +1,11 @@
-import { Text, SimpleGrid, Button, Box } from "@chakra-ui/react";
+import { Text, SimpleGrid, Button, Box, Spinner } from "@chakra-ui/react";
 import useFetchGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { GameFilterConfig } from "../interfaces/game";
 import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
   const {
@@ -31,9 +32,21 @@ const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
     );
   }
 
+  const fetchGamesCount =
+    data?.pages.reduce((acc, curr) => acc + curr.results.length, 0) || 0;
+
   return (
-    <Box padding={"10px"}>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+    <InfiniteScroll
+      dataLength={fetchGamesCount}
+      hasMore={!!hasNextPage}
+      next={() => fetchNextPage()}
+      loader={<Spinner />}
+    >
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        spacing={6}
+        padding={"10px"}
+      >
         {isLoading &&
           skeletons.map((item) => (
             <GameCardContainer key={item}>
@@ -50,16 +63,7 @@ const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
           </React.Fragment>
         ))}
       </SimpleGrid>
-      {hasNextPage && (
-        <Button
-          marginY={5}
-          disabled={isFetchingNextPage}
-          onClick={() => fetchNextPage()}
-        >
-          {isFetchingNextPage ? "Loading..." : "Load More"}
-        </Button>
-      )}
-    </Box>
+    </InfiniteScroll>
   );
 };
 
