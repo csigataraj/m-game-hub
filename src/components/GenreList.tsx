@@ -7,17 +7,14 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import getCroppedImageUrl from "../services/image-url";
-import { Genre } from "../interfaces/genre";
 import useFetchGenres from "../hooks/useGenres";
+import useGameQueryStore from "../store";
 
-const GenreList = ({
-  selectedGenre,
-  onSelectGenre,
-}: {
-  selectedGenre?: number;
-  onSelectGenre: (genre: Genre) => void;
-}) => {
+const GenreList = () => {
+  const selectedGenreId = useGameQueryStore((s) => s.query.genre);
+  const setSelectedGenre = useGameQueryStore((s) => s.selectGenre);
   const { data } = useFetchGenres();
+
   let sortedData = data ? [...data.results] : [];
   sortedData.sort((a, b) =>
     a.name.toLowerCase().localeCompare(b.name.toLowerCase())
@@ -38,12 +35,12 @@ const GenreList = ({
                 src={getCroppedImageUrl(item.image_background)}
               />
               <Button
-                fontWeight={item.id === selectedGenre ? "bold" : "normal"}
+                fontWeight={item.id === selectedGenreId ? "bold" : "normal"}
                 fontSize="lg"
                 variant="link"
                 whiteSpace={"normal"}
                 textAlign={"left"}
-                onClick={() => onSelectGenre(item)}
+                onClick={() => setSelectedGenre(item.id)}
               >
                 {item.name}
               </Button>

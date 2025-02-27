@@ -1,21 +1,15 @@
-import { Text, SimpleGrid, Button, Box, Spinner } from "@chakra-ui/react";
+import { Text, SimpleGrid, Spinner } from "@chakra-ui/react";
 import useFetchGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import { GameFilterConfig } from "../interfaces/game";
+
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const GameGrid = ({ filterConfig }: { filterConfig: GameFilterConfig }) => {
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useFetchGames(filterConfig);
+const GameGrid = () => {
+  const { data, error, isLoading, hasNextPage, fetchNextPage } =
+    useFetchGames();
   const skeletons = Array()
     .fill(6)
     .map((_, index) => index + 1);

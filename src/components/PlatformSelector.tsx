@@ -3,15 +3,12 @@ import useFetchPlatforms from "../hooks/usePlatforms";
 import { Platform } from "../interfaces/platform";
 import { BsChevronDown } from "react-icons/bs";
 import useId from "../hooks/useId";
+import useGameQueryStore from "../store";
 
-const PlatformSelector = ({
-  selectedPlatform,
-  onSelectPlatform,
-}: {
-  selectedPlatform?: number;
-  onSelectPlatform: (value: Platform) => void;
-}) => {
+const PlatformSelector = () => {
   const { data } = useFetchPlatforms();
+  const selectedPlatform = useGameQueryStore((s) => s.query.platform);
+  const setSelectedPlatform = useGameQueryStore((s) => s.selectPlatform);
 
   let sortedData = data ? [...data.results] : [];
   sortedData.sort((a, b) =>
@@ -26,7 +23,7 @@ const PlatformSelector = ({
       <MenuList>
         {sortedData.map((platform) => (
           <MenuItem
-            onClick={() => onSelectPlatform(platform)}
+            onClick={() => setSelectedPlatform(platform.id)}
             key={platform.id}
           >
             {platform.name}

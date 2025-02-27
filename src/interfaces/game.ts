@@ -22,6 +22,6 @@ export interface GameResponse {
 export interface GameFilterConfig {
   genre?: number;
   platform?: number;
-  order: string;
-  searchText: string;
+  order?: string;
+  searchText?: string;
 }
