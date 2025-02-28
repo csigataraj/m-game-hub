@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { ONE_DAY } from "../config/config";
 import APIClient from "../services/apiClient";
-import { GameDetails } from "../interfaces/game";
+import { Game } from "../interfaces/game";
 
-const apiClient = new APIClient<GameDetails>("/games");
+const apiClient = new APIClient<Game>("/games");
 
 const useGameDetails = (slug: string) =>
   useQuery({

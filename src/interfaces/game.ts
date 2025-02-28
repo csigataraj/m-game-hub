@@ -5,6 +5,9 @@ export interface Game {
   id: number;
   name: string;
   slug: string;
+  genres: Genre[];
+  publishers: Publisher[];
+  description_raw: string;
   background_image: string;
   parent_platforms: {
     platform: Platform
@@ -27,17 +30,7 @@ export interface GameFilterConfig {
   searchText?: string;
 }
 
-export interface GameDetailsResponse {
-
-}
-
-export interface GameDetails {
+export interface Publisher {
   id: number;
-  slug: string;
   name: string;
-  description_raw: string;
-  metacritic: number;
-  background_image: string;
-  released: string;
-  website: string;
 }
