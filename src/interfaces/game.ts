@@ -34,3 +34,21 @@ export interface Publisher {
   id: number;
   name: string;
 }
+
+export interface Movie{
+  id: number,
+  name: string;
+  preview: string;
+  data: {
+    480: string;
+    max: string;
+  };
+}
+
+export interface Screenshot {
+  id: number,
+  image: string,
+  hidden: boolean,
+  width: number,
+  height: number
+}
