@@ -11,7 +11,7 @@ const GameCard = ({ game }: { game: Game }) => {
     <Link to={`/games/${game.slug}`}>
       <Card>
         <Image src={getCroppedImageUrl(game.background_image)} />
-        <CardBody>
+        <CardBody flex={"none"} height={"185px"}>
           <HStack justifyContent={"space-between"} marginBottom={3}>
             <PlatformIconList platforms={game.parent_platforms} />
             <Score value={game.metacritic} />
