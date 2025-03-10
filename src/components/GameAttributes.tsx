@@ -5,7 +5,7 @@ import Score from "./Score";
 
 const GameAttributes = ({ game }: { game: Game }) => {
   return (
-    <SimpleGrid as="dl" columns={2} spacing={20} padding={"10px"}>
+    <SimpleGrid as="dl" columns={2} spacingX={20} padding={"10px"}>
       <DefinitionItem term="Platforms">
         {game.parent_platforms?.map(({ platform }) => (
           <Text>{platform.name}</Text>
