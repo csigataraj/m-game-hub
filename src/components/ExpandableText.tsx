@@ -2,7 +2,7 @@ import { Button, Text } from "@chakra-ui/react";
 import { ReactNode, useState } from "react";
 
 const ExpandableText = ({ children }: { children: string }) => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const limit = 300;
   const summary = expanded ? children : `${children.substring(0, limit)} ... `;
 
@@ -21,7 +21,7 @@ const ExpandableText = ({ children }: { children: string }) => {
           marginLeft={1}
           onClick={() => setExpanded(!expanded)}
         >
-          {expanded ? "Show More" : "Show Less"}
+          {expanded ? "Show Less" : "Show More"}
         </Button>
       </Text>
     </>
