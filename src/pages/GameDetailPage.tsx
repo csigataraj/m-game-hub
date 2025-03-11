@@ -1,10 +1,7 @@
 import useGameDetails from "../hooks/useGameDetails";
 import { Box, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-
 import ExpandableText from "../components/ExpandableText";
-import DefinitionItem from "../components/DefinitionItem";
-import Score from "../components/Score";
 import GameAttributes from "../components/GameAttributes";
 import GameTrailer from "../components/GameTrailer";
 import GameScreenShots from "../components/GameScreenShots";

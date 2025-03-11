@@ -8,7 +8,7 @@ const GameAttributes = ({ game }: { game: Game }) => {
     <SimpleGrid as="dl" columns={2} spacingX={20} padding={"10px"}>
       <DefinitionItem term="Platforms">
         {game.parent_platforms?.map(({ platform }) => (
-          <Text>{platform.name}</Text>
+          <Text key={platform.id}>{platform.name}</Text>
         ))}
       </DefinitionItem>
       <DefinitionItem term="Metascore">
