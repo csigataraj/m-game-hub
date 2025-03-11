@@ -1,12 +1,6 @@
-import {
-  Badge,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Text,
-} from "@chakra-ui/react";
+import { Badge, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
-import { BsSearch } from "react-icons/bs";
+import { BsSearch, BsXCircleFill } from "react-icons/bs";
 import useGameQueryStore from "../store";
 import { useNavigate } from "react-router-dom";
 
@@ -41,18 +35,22 @@ const SearchBar = () => {
         <Badge
           colorScheme="blue"
           mt={2}
-          onClick={() => {
-            search("");
-          }}
-          cursor="pointer"
           marginLeft={1}
           borderRadius={5}
           position={"absolute"}
+          paddingX={2}
+          paddingY={1}
+          display={"flex"}
+          alignItems={"center"}
         >
           {query.searchText}
-          <Text marginLeft="5px" display={"inline"} autoCapitalize="true">
-            ✖
-          </Text>
+          <BsXCircleFill
+            onClick={() => {
+              search("");
+            }}
+            cursor={"pointer"}
+            style={{ marginLeft: "8px" }}
+          />
         </Badge>
       )}
     </form>
